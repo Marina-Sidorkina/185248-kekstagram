@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Marina Sidorkina](https://up.htmlacademy.ru/javascript/16/user/185248).
-* Наставник: `Неизвестно`.
+* Наставник: `Проект выполняется без наставника`.
 
 ---
 
