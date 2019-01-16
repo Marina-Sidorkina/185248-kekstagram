@@ -27,6 +27,7 @@
   var commentTemplate = document.querySelector('.social__comment');
   var photoBlock = document.querySelector('.pictures');
   var bigPhoto = document.querySelector('.big-picture');
+  var bigPhotoCloseButton = bigPhoto.querySelector('.big-picture__cancel');
   var commentsCount = document.querySelector('.social__comment-count');
   var commentsLoader = document.querySelector('.comments-loader');
   var photosArray = [];
@@ -76,13 +77,16 @@
   var renderPhotosSet = function () {
     var fragment = document.createDocumentFragment();
     photosArray = createPhotosArray();
-    for (var i = 0; i < photosArray.length; i++) {
+    photosArray.forEach(function (item) {
       var photo = photoTemplate.cloneNode(true);
-      photo.querySelector('.picture__img').src = photosArray[i].url;
-      photo.querySelector('.picture__likes').textContent = '' + photosArray[i].likes + '';
-      photo.querySelector('.picture__comments').textContent = '' + photosArray[i].comments.length + '';
+      photo.querySelector('.picture__img').src = item.url;
+      photo.querySelector('.picture__likes').textContent = '' + item.likes + '';
+      photo.querySelector('.picture__comments').textContent = '' + item.comments.length + '';
+      photo.addEventListener('click', function () {
+        showBigPhoto(item);
+      });
       fragment.appendChild(photo);
-    }
+    });
     return fragment;
   };
 
@@ -97,8 +101,7 @@
     return fragment;
   };
 
-  var renderBigPhoto = function () {
-    var object = photosArray[0];
+  var showBigPhoto = function (object) {
     var comments = bigPhoto.querySelector('.social__comments');
     bigPhoto.querySelector('.image-block__item').src = object.url;
     bigPhoto.querySelector('.likes-count').textContent = '' + object.likes + '';
@@ -106,11 +109,24 @@
     comments.innerHTML = '';
     comments.appendChild(renderCommentsSet(object));
     bigPhoto.querySelector('.social__caption').textContent = object.description;
+    bigPhoto.classList.remove('hidden');
+    document.addEventListener('keydown', onBigPhotoEscape);
+    bigPhotoCloseButton.addEventListener('click', onBigPhotoClose);
+  };
+
+  var onBigPhotoClose = function () {
+    bigPhoto.classList.add('hidden');
+    document.removeEventListener('keydown', onBigPhotoEscape);
+    bigPhotoCloseButton.removeEventListener('click', onBigPhotoClose);
+  };
+
+  var onBigPhotoEscape = function (evt) {
+    if (window.utils.onEscapeKeydown(evt.keyCode)) {
+      onBigPhotoClose();
+    }
   };
 
   photoBlock.appendChild(renderPhotosSet());
-  renderBigPhoto();
-  bigPhoto.classList.remove('hidden');
   commentsCount.classList.add('visually-hidden');
   commentsLoader.classList.add('visually-hidden');
 })();
