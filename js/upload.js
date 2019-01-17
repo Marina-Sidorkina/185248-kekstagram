@@ -10,7 +10,6 @@
     window.filters.setDefaultEffect();
     window.filters.setEffect();
     window.range.resetPin();
-    window.range.setLineDepth();
     document.addEventListener('keydown', onPhotoEditorEscape);
     photoEditorCloseButton.addEventListener('click', onPhotoEditorClose);
   };
@@ -18,7 +17,6 @@
   var onPhotoEditorClose = function () {
     photoEditor.classList.add('hidden');
     window.range.resetPin();
-    window.range.setLineDepth();
     photoInput.value = '';
     document.removeEventListener('keydown', onPhotoEditorEscape);
     photoEditorCloseButton.removeEventListener('click', onPhotoEditorClose);

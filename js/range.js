@@ -37,10 +37,6 @@
     rangeLineDepth.style.width = getRangeValue() + '%';
   };
 
-  var resetRangeLineDepth = function () {
-    rangeLineDepth.style.width = '100%';
-  };
-
   var onMouseDown = function (evt) {
     evt.preventDefault();
     var startCoordinates = evt.clientX;
@@ -66,6 +62,7 @@
 
   var resetRangePin = function () {
     rangePin.style.left = RangePinBreakpoint.RIGHT + 'px';
+    rangeLineDepth.style.width = '100%';
   };
 
   var hideRangeBlock = function () {
@@ -82,7 +79,6 @@
     getValue: getRangeValue,
     resetPin: resetRangePin,
     setLineDepth: setRangeLineDepth,
-    resetLineDepth: resetRangeLineDepth,
     showBlock: showRangeBlock,
     hideBlock: hideRangeBlock
   };

@@ -77,7 +77,6 @@
     if (evt.target.classList.contains('effects__radio')) {
       resetPreview();
       window.range.resetPin();
-      window.range.resetLineDepth();
       setEffect(window.range.getValue());
     }
   };
