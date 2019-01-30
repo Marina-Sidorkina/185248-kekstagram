@@ -23,7 +23,7 @@
   };
 
   var onPhotoEditorEscape = function (evt) {
-    if (window.utils.onEscapeKeydown(evt.keyCode)) {
+    if (window.utils.onEscapeKeydown(evt.keyCode) && !window.checkTarget(evt)) {
       onPhotoEditorClose();
     }
   };

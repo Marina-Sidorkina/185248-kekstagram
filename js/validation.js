@@ -2,6 +2,7 @@
 
 (function () {
   var hashtagInput = document.querySelector('.text__hashtags');
+  var commentInput = document.querySelector('.text__description');
 
   var TestTemplate = {
     FIRST_SYMBOL_ONE: /^#/,
@@ -14,7 +15,7 @@
 
   var checkDoubling = function (array) {
     var result = false;
-    for (var i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length - 1; i++) {
       result = array.some(function (item, index) {
         return array[i].toLowerCase() === item.toLowerCase() && index !== i;
       });
@@ -28,6 +29,10 @@
   var getArray = function (string) {
     var result = string.replace(/#/g, '');
     return result.split(' ');
+  };
+
+  var checkTarget = function (evt) {
+    return evt.target === hashtagInput || evt.target === commentInput;
   };
 
   var onHashtagInvalid = function (evt) {
@@ -51,4 +56,6 @@
   };
 
   hashtagInput.addEventListener('input', onHashtagInvalid);
+
+  window.checkTarget = checkTarget;
 })();
