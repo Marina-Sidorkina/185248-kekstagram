@@ -4,9 +4,9 @@
   var EFFECTS_FILTER_MAX_VALUE = 100;
   var EFFECTS = ['effects__preview--none', 'effects__preview--chrome', 'effects__preview--sepia',
     'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
-  var photoEditorForm = document.querySelector('.img-upload__form');
   var photoEditorBlock = document.querySelector('.img-upload__effects');
   var photoEditorEffects = photoEditorBlock.querySelectorAll('input[type="radio"]');
+  var photoEditorEffectsInput = document.querySelector('input[name="effect-level"]');
   var newPhotoPreview = document.querySelector('.img-upload__preview img');
   var defaultEffect = document.querySelector('#effect-none');
   var EffectSetting = {
@@ -68,6 +68,7 @@
         var effectValue = EffectSetting[item.value].MAX / EFFECTS_FILTER_MAX_VALUE * rangeValue;
         newPhotoPreview.classList.add(EFFECTS[index]);
         newPhotoPreview.style.filter = EffectSetting[item.value].setValue(effectValue);
+        photoEditorEffectsInput.value = Math.round(rangeValue);
         setRangeBlockVisibility(item);
       }
     });
@@ -85,10 +86,9 @@
     defaultEffect.checked = true;
   };
 
-  photoEditorForm.addEventListener('change', onEffectChange);
-
   window.filters = {
     setEffect: setEffect,
-    setDefaultEffect: setDefaultEffect
+    setDefaultEffect: setDefaultEffect,
+    onEffectChange: onEffectChange
   };
 })();
